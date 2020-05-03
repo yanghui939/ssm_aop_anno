@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--mybatis配置文件-->
+    <!--引入properties文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--配置数据源-->
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置SessionFactory-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="datasource"/>
+        <!--指定映射文件的位置-->
+        <property name="mapperLocations" value="classpath:com/yh/mapper/StudentMapper.xml"/>
+        <!--给com.yh.pojo的类指定别名-->
+        <property name="typeAliasesPackage" value="com.yh.pojo"/>
+    </bean>
+
+    <!--扫描dao接口-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yh.dao"/>
+    </bean>
+</beans>

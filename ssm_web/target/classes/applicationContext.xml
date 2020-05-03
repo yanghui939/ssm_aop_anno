@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--该文件就是为了引用mybatis和spring配置文件，然后在web.xml里面配置监听加载这个文件从而加载mybatis和spring配置文件-->
+    <!--引用mybatis的配置文件-->
+    <import resource="classpath:spring/applicationContext-dao.xml"/>
+    <!--引用spring的配置文件-->
+    <import resource="classpath:spring/applicationContext-service.xml"/>
+</beans>
